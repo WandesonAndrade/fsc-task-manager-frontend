@@ -3,12 +3,16 @@ import axios from "axios";
 
 import "./Tasks.scss";
 
+import TaskItem from "./TaskItem";
+
 const Tasks = () => {
   const [task, setTask] = useState([]);
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/tasks");
+      const { data } = await axios.get(
+        "https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks"
+      );
       setTask(data);
     } catch (error) {
       console.error(error);
@@ -28,7 +32,7 @@ const Tasks = () => {
           {task
             .filter((task) => !task.isCompleted)
             .map((lastTask) => (
-              <p>{lastTask.description}</p>
+              <TaskItem task={lastTask} />
             ))}
         </div>
       </div>
@@ -38,8 +42,8 @@ const Tasks = () => {
         <div className="tasks-list">
           {task
             .filter((task) => task.isCompleted)
-            .map((lastTask) => (
-              <p>{lastTask.description}</p>
+            .map((completedTask) => (
+              <TaskItem task={completedTask} />
             ))}
         </div>
       </div>
