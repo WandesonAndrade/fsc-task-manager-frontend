@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { MdAddToPhotos } from "react-icons/md";
+import { MdAddToPhotos, MdDescription } from "react-icons/md";
 import { useAlert } from "react-alert";
+import axios from "axios";
 
 import CustomInput from "./CustomInput";
 import CustomButton from "./CustomButton";
@@ -13,11 +14,16 @@ const AddTask = () => {
 
   const onChange = (e) => setTask(e.target.value);
 
-  const handleTask = () => {
+  const handleTask = async () => {
     try {
       if (task.length === 0) {
         return alert.error("Preencha o campo de tarefa.");
       }
+
+      await axios.post(
+        "https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks",
+        { description: task, isCompleted: false }
+      );
     } catch (error) {}
   };
 
