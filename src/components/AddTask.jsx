@@ -7,7 +7,7 @@ import CustomInput from "./CustomInput";
 import CustomButton from "./CustomButton";
 
 import "./AddTask.scss";
-const AddTask = () => {
+const AddTask = ({ fetchTasks }) => {
   const [task, setTask] = useState("");
 
   const alert = useAlert();
@@ -24,6 +24,9 @@ const AddTask = () => {
         "https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks",
         { description: task, isCompleted: false }
       );
+
+      await fetchTasks();
+      setTask("");
     } catch (error) {}
   };
 
