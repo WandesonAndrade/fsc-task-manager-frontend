@@ -1,6 +1,37 @@
-import "./TaskItem.scss";
 import { FaDeleteLeft } from "react-icons/fa6";
-const TaskItem = ({ task }) => {
+import axios from "axios";
+import { useAlert } from "react-alert";
+
+import "./TaskItem.scss";
+const TaskItem = ({ task, fetchTasks }) => {
+  const alert = useAlert();
+  const handeleDeletion = async () => {
+    try {
+      await axios.delete(
+        `https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks/${task._id}`
+      );
+      await fetchTasks();
+
+      alert.success("Tarefa deletada com sucesso.");
+    } catch (error) {
+      alert.error("Erro ao deletar tarefa.");
+    }
+  };
+  const handleTaskCompletionOnChange = async (e) => {
+    try {
+      await axios.patch(
+        `https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks/${task._id}`,
+        { isCompleted: e.target.checked }
+      );
+
+      await fetchTasks();
+
+      alert.success("Tarefa atualizada com sucesso.");
+    } catch (error) {
+      console.log(error);
+      alert.error("algo deu errado.");
+    }
+  };
   return (
     <div className="task-item-container">
       <div className="task-description">
@@ -12,14 +43,18 @@ const TaskItem = ({ task }) => {
           }
         >
           {task.description}
-          <input type="checkbox" defaultChecked={task.isCompleted} />
+          <input
+            type="checkbox"
+            defaultChecked={task.isCompleted}
+            onChange={(e) => handleTaskCompletionOnChange(e)}
+          />
           <span
             className={task.isCompleted ? "checkmark completed" : "checkmark"}
           ></span>
         </label>
       </div>
       <div className="delete">
-        <FaDeleteLeft size={18} color="red" />
+        <FaDeleteLeft size={18} color="red" onClick={handeleDeletion} />
       </div>
     </div>
   );
