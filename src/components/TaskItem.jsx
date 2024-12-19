@@ -7,9 +7,7 @@ const TaskItem = ({ task, fetchTasks }) => {
   const alert = useAlert();
   const handeleDeletion = async () => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/tasks/${task._id}`
-      );
+      await axios.delete(`${process.env.REACT_APP_API_URL}/tasks/${task._id}`);
       await fetchTasks();
 
       alert.success("Tarefa deletada com sucesso.");
@@ -19,10 +17,9 @@ const TaskItem = ({ task, fetchTasks }) => {
   };
   const handleTaskCompletionOnChange = async (e) => {
     try {
-      await axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/tasks/${task._id}`,
-        { isCompleted: e.target.checked }
-      );
+      await axios.patch(`${process.env.REACT_APP_API_URL}/tasks/${task._id}`, {
+        isCompleted: e.target.checked,
+      });
 
       await fetchTasks();
 

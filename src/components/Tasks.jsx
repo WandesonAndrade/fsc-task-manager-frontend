@@ -15,7 +15,7 @@ const Tasks = () => {
   const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/tasks`
+        `${process.env.REACT_APP_API_URL}/tasks`
       );
       setTask(data);
     } catch (_error) {

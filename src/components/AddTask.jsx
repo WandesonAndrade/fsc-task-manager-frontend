@@ -20,7 +20,7 @@ const AddTask = ({ fetchTasks }) => {
         return alert.error("Preencha o campo de tarefa.");
       }
 
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tasks`, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/tasks`, {
         description: task,
         isCompleted: false,
       });
