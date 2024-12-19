@@ -20,10 +20,10 @@ const AddTask = ({ fetchTasks }) => {
         return alert.error("Preencha o campo de tarefa.");
       }
 
-      await axios.post(
-        "https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks",
-        { description: task, isCompleted: false }
-      );
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tasks`, {
+        description: task,
+        isCompleted: false,
+      });
 
       await fetchTasks();
       setTask("");

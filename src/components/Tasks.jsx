@@ -15,7 +15,7 @@ const Tasks = () => {
   const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks"
+        `${process.env.REACT_APP_BACKEND_URL}/tasks`
       );
       setTask(data);
     } catch (_error) {

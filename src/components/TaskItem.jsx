@@ -8,7 +8,7 @@ const TaskItem = ({ task, fetchTasks }) => {
   const handeleDeletion = async () => {
     try {
       await axios.delete(
-        `https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks/${task._id}`
+        `${process.env.REACT_APP_BACKEND_URL}/tasks/${task._id}`
       );
       await fetchTasks();
 
@@ -20,7 +20,7 @@ const TaskItem = ({ task, fetchTasks }) => {
   const handleTaskCompletionOnChange = async (e) => {
     try {
       await axios.patch(
-        `https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks/${task._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/tasks/${task._id}`,
         { isCompleted: e.target.checked }
       );
 
