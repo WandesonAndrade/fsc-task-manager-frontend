@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAlert } from "react-alert";
 
 import "./Tasks.scss";
 
@@ -7,6 +8,8 @@ import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
 
 const Tasks = () => {
+  const alert = useAlert();
+
   const [task, setTask] = useState([]);
 
   const fetchTasks = async () => {
@@ -15,8 +18,8 @@ const Tasks = () => {
         "https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks"
       );
       setTask(data);
-    } catch (error) {
-      console.error(error);
+    } catch (_error) {
+      alert.error("Não foi possivel carregar as tarefas.");
     }
   };
 

@@ -27,7 +27,9 @@ const AddTask = ({ fetchTasks }) => {
 
       await fetchTasks();
       setTask("");
-    } catch (error) {}
+    } catch (_error) {
+      alert.error("Não foi possivel adicionar a tarefa.");
+    }
   };
 
   return (
