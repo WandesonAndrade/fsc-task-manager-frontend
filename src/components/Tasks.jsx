@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
 import { useAlert } from "react-alert";
 
@@ -12,7 +12,7 @@ const Tasks = () => {
 
   const [task, setTask] = useState([]);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get(
         "https://wandesonandrade-fsc-task-manager-backend.onrender.com/tasks"
@@ -21,7 +21,7 @@ const Tasks = () => {
     } catch (_error) {
       alert.error("Não foi possivel carregar as tarefas.");
     }
-  };
+  }, [alert]);
 
   const lastTasks = useMemo(
     () => task.filter((task) => task.isCompleted === false),
@@ -34,7 +34,7 @@ const Tasks = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   return (
     <div className="tasks-container">
