@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { useAlert } from "react-alert";
 
@@ -23,6 +23,15 @@ const Tasks = () => {
     }
   };
 
+  const lastTasks = useMemo(
+    () => task.filter((task) => task.isCompleted === false),
+    [task]
+  );
+  const completedTasks = useMemo(
+    () => task.filter((task) => task.isCompleted),
+    [task]
+  );
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -34,22 +43,26 @@ const Tasks = () => {
         <h3>Últimas tarefas</h3>
         <AddTask fetchTasks={fetchTasks} />
         <div className="tasks-list">
-          {task
-            .filter((task) => task.isCompleted === false)
-            .map((lastTask) => (
-              <TaskItem task={lastTask} fetchTasks={fetchTasks} />
-            ))}
+          {lastTasks.map((lastTask) => (
+            <TaskItem
+              task={lastTask}
+              key={lastTask._id}
+              fetchTasks={fetchTasks}
+            />
+          ))}
         </div>
       </div>
 
       <div className="completed-tasks">
         <h3>Tarefas concluidas</h3>
         <div className="tasks-list">
-          {task
-            .filter((task) => task.isCompleted)
-            .map((completedTask) => (
-              <TaskItem task={completedTask} fetchTasks={fetchTasks} />
-            ))}
+          {completedTasks.map((completedTask) => (
+            <TaskItem
+              key={completedTask._id}
+              task={completedTask}
+              fetchTasks={fetchTasks}
+            />
+          ))}
         </div>
       </div>
     </div>
