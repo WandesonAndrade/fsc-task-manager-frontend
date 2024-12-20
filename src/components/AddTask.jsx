@@ -49,3 +49,6 @@ const AddTask = ({ fetchTasks }) => {
 };
 
 export default AddTask;
+//wandeson andrade
+
+console.log(process.env.REACT_APP_API_URL);
