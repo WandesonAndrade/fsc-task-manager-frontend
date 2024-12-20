@@ -15,7 +15,7 @@ import App from "./App";
 
 /*<AlertProvider template={AlertTemplate} {...options}>
       </AlertProvider>*/
-
+const PORT = process.env.PORT || 9000;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
