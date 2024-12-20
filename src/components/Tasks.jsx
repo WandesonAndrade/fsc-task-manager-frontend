@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
-import { useAlert } from "react-alert";
+//import { useAlert } from "react-alert";
 
 import "./Tasks.scss";
 
@@ -8,7 +8,7 @@ import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
 
 const Tasks = () => {
-  const alert = useAlert();
+  //const alert = useAlert();
 
   const [task, setTask] = useState([]);
 
@@ -19,9 +19,9 @@ const Tasks = () => {
       );
       setTask(data);
     } catch (_error) {
-      alert.error("Não foi possivel carregar as tarefas.");
+      //alert.error("Não foi possivel carregar as tarefas.");
     }
-  }, [alert]);
+  }, []);
 
   const lastTasks = useMemo(
     () => task.filter((task) => task.isCompleted === false),
