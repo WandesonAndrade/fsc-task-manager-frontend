@@ -1,18 +1,17 @@
 import { FaDeleteLeft } from "react-icons/fa6";
 import axios from "axios";
-//import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 
 import "./TaskItem.scss";
 const TaskItem = ({ task, fetchTasks }) => {
-  // const alert = useAlert();
   const handeleDeletion = async () => {
     try {
       await axios.delete(`${process.env.REACT_APP_API_URL}/tasks/${task._id}`);
       await fetchTasks();
 
-      alert.success("Tarefa deletada com sucesso.");
+      toast.success("Tarefa deletada com sucesso.");
     } catch (_error) {
-      //alert.error("Erro ao deletar tarefa.");
+      toast.error("Erro ao deletar tarefa.");
     }
   };
   const handleTaskCompletionOnChange = async (e) => {
@@ -23,9 +22,9 @@ const TaskItem = ({ task, fetchTasks }) => {
 
       await fetchTasks();
 
-      //alert.success("Tarefa atualizada com sucesso.");
+      toast.success("Tarefa atualizada com sucesso.");
     } catch (_error) {
-      //alert.error("algo deu errado.");
+      toast.error("algo deu errado.");
     }
   };
   return (

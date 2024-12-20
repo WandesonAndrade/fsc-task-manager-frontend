@@ -1,9 +1,8 @@
 //import de bibliotecas
 import React from "react";
 import ReactDOM from "react-dom/client";
-//import { positions, transitions, Provider as AlertProvider } from "react-alert";
-//import AlertTemplate from "react-alert-template-basic";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 //import de estilos
 
@@ -14,16 +13,6 @@ import "./index.scss";
 //import de componentes
 import App from "./App";
 
-// optional configuration
-const options = {
-  // you can also just use 'bottom center'
-  //position: positions.BOTTOM_CENTER,
-  timeout: 2500,
-  offset: "30px",
-  // you can also just use 'scale'
-  // transition: transitions.SCALE,
-};
-
 /*<AlertProvider template={AlertTemplate} {...options}>
       </AlertProvider>*/
 
@@ -32,6 +21,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      <ToastContainer />
     </BrowserRouter>
   </React.StrictMode>
 );

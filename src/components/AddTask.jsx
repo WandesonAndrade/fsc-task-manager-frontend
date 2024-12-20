@@ -12,17 +12,14 @@ import "./AddTask.scss";
 const AddTask = ({ fetchTasks }) => {
   const [task, setTask] = useState("");
 
-  const notify = () => toast("Preencha o campo de tarefa.");
-
   const onChange = (e) => setTask(e.target.value);
 
   const handleTask = async () => {
     try {
       if (task.length === 0) {
-        //return alert.error("Preencha o campo de tarefa.");
-        notify();
+        return toast.error("Preencha o campo de tarefa.");
       }
-
+      toast.success("Tarefa adicionada com sucesso.");
       await axios.post(`${process.env.REACT_APP_API_URL}/tasks`, {
         description: task,
         isCompleted: false,
@@ -31,7 +28,7 @@ const AddTask = ({ fetchTasks }) => {
       await fetchTasks();
       setTask("");
     } catch (_error) {
-      alert.error("Não foi possivel adicionar a tarefa.");
+      toast.error("Não foi possivel adicionar a tarefa.");
     }
   };
 
@@ -52,6 +49,3 @@ const AddTask = ({ fetchTasks }) => {
 };
 
 export default AddTask;
-//wandeson andrade
-
-console.log(process.env.REACT_APP_API_URL);

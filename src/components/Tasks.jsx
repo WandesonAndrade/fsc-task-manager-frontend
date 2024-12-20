@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
-//import { useAlert } from "react-alert";
+import { toast } from "react-toastify";
 
 import "./Tasks.scss";
 
@@ -8,8 +8,6 @@ import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
 
 const Tasks = () => {
-  //const alert = useAlert();
-
   const [task, setTask] = useState([]);
 
   const fetchTasks = useCallback(async () => {
@@ -19,7 +17,7 @@ const Tasks = () => {
       );
       setTask(data);
     } catch (_error) {
-      //alert.error("Não foi possivel carregar as tarefas.");
+      toast.error("Não foi possivel carregar as tarefas.");
     }
   }, []);
 
